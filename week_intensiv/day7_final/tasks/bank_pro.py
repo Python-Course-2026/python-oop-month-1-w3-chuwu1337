@@ -44,5 +44,13 @@ class BankPro:
        - Вернуть "Успех".
     """
     def transfer(self, from_acc, to_acc, amount):
-        # ТВОЙ КОД ЗДЕСЬ
-        pass
+        withdraw = amount
+        if isinstance(from_acc, BusinessAccount):
+            comm = amount * 5 // 100
+            withdraw = amount + comm
+        if not from_acc.withdraw(withdraw):
+            return "Ошибка"
+
+        to_acc.deposit(amount)
+        return "Успех"
+    
